@@ -369,7 +369,7 @@ async function handleAiGeneration() {
         .trim();
       
       console.log(chalk.green('✓ Generated command:'));
-      console.log(chalk.cyan.bold(`  ${cleanCommand}\n`));
+      console.log(chalk.blackBright.bold(`  ${cleanCommand}\n`));
       
       const answer = await askConfirmation(
         chalk.yellow('Execute this command? (y/n): ')
