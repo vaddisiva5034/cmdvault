@@ -1,6 +1,11 @@
 # CmdVault
 
-A smart terminal assistant that remembers, stores, and executes shell commands using user-defined keys.
+[![npm version](https://badge.fury.io/js/cmdvault.svg)](https://www.npmjs.com/package/cmdvault)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+**A smart terminal assistant that remembers, stores, and executes your shell commands.**
+
+Stop typing the same long commands over and over. CmdVault lets you save any command with a short, memorable key and execute it instantly. Plus, generate commands from natural language using AI!
 
 ## Features
 
@@ -18,29 +23,27 @@ A smart terminal assistant that remembers, stores, and executes shell commands u
 
 ## Installation
 
-### Install Globally
-
-```bash
-npm install -g
-```
-
-Or from npm (once published):
+Install CmdVault globally using npm:
 
 ```bash
 npm install -g cmdvault
 ```
 
-### Local Development
+That's it! You can now use the `cm` command anywhere in your terminal.
+
+## Quick Start
+
+Get started in 30 seconds:
 
 ```bash
-# Clone the repository
-cd smart-term
+# 1. Save your first command
+cm s hello echo "Hello from CmdVault!"
 
-# Install dependencies
-npm install
+# 2. Run it using the key
+cm hello
 
-# Link globally for testing
-npm link
+# 3. View all saved commands
+cm list
 ```
 
 ## Usage
@@ -215,22 +218,6 @@ cm d gs
 | `cm --help` | Show help information | `cm --help` |
 | `cm --version` | Show version | `cm --version` |
 
-## Storage Location
-
-Commands are stored in a JSON file at:
-
-- **Linux/Mac:** `~/.cmvault/commands.json`
-- **Windows:** `C:\Users\<username>\.cmvault\commands.json`
-
-Example `commands.json`:
-```json
-{
-  "gs": "git status",
-  "gp": "git pull origin main",
-  "dev": "npm run dev"
-}
-```
-
 ## Examples
 
 ### Git Workflow
@@ -321,68 +308,19 @@ cm gp
 [CM] Executed: git pull origin main
 ```
 
-## Publishing to npm
+## How It Works
 
-### Prepare for Publishing
+CmdVault stores your commands in a simple JSON file on your system:
 
-1. Update `package.json` with your details:
+- **Linux/Mac:** `~/.cmvault/commands.json`
+- **Windows:** `C:\Users\<username>\.cmvault\commands.json`
 
-```json
-{
-  "name": "cmdvault",
-  "author": "Your Name <your.email@example.com>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yourusername/cmdvault"
-  }
-}
-```
-
-2. Create an npm account:
-
-```bash
-npm adduser
-```
-
-3. Publish:
-
-```bash
-npm publish
-```
-
-### Install from npm
-
-Once published, users can install globally:
-
-```bash
-npm install -g cmdvault
-```
-
-## Project Structure
-
-```
-smart-term/
-├── bin/
-│   └── cm.js              # Executable entry point
-├── lib/
-│   ├── storage.js         # Command storage management
-│   ├── executor.js        # Command execution with streaming
-│   └── editor.js          # Editor integration
-├── index.js               # Main CLI logic
-├── package.json           # Package configuration
-└── README.md             # Documentation
-```
+Your commands are stored locally and never sent anywhere (except when using the AI generation feature, which sends only your prompt to the selected AI provider).
 
 ## Requirements
 
 - Node.js >= 14.0.0
-- npm or yarn
-
-## Dependencies
-
-- **commander** - CLI framework
-- **chalk** - Terminal colors
-- **cli-table3** - Beautiful tables
+- npm (comes with Node.js)
 
 ## Troubleshooting
 
@@ -390,21 +328,18 @@ smart-term/
 
 After installation, if `cm` is not recognized:
 
-```bash
-# Re-link the package
-npm link
+1. **Restart your terminal** - This ensures the PATH is updated
+2. **Check npm global installation path:**
+   ```bash
+   npm config get prefix
+   ```
+   Make sure this directory is in your system PATH
 
-# Or check your PATH includes npm global bin
-npm config get prefix
-```
-
-### Permission denied
-
-On Linux/Mac, you may need to make the bin file executable:
-
-```bash
-chmod +x bin/cm.js
-```
+3. **Reinstall the package:**
+   ```bash
+   npm uninstall -g cmdvault
+   npm install -g cmdvault
+   ```
 
 ### Editor not opening
 
@@ -420,14 +355,48 @@ export EDITOR=vim
 set EDITOR=notepad
 ```
 
+## FAQ
+
+### Is my data safe?
+
+Yes! All your commands are stored locally on your machine in `~/.cmvault/commands.json`. Nothing is sent to external servers unless you use the AI generation feature, which only sends your natural language prompt to your chosen AI provider.
+
+### Can I use this on multiple machines?
+
+Yes! You can install CmdVault on as many machines as you like. If you want to sync commands between machines, you can manually copy the `~/.cmvault/commands.json` file or use a cloud sync service like Dropbox/Google Drive.
+
+### Do I need an API key to use CmdVault?
+
+No! The core functionality (saving, listing, and executing commands) works without any API key. You only need an API key if you want to use the AI command generation feature (`cm -g`).
+
+### What AI providers are supported?
+
+CmdVault supports:
+- OpenAI (GPT-4, GPT-3.5)
+- Anthropic (Claude)
+- Google Gemini
+- Groq
+- OpenRouter
+
+Configure your preferred provider with `cm config`.
+
+### Can I export my commands?
+
+Yes! Your commands are stored in a simple JSON file at `~/.cmvault/commands.json`. You can copy, backup, or edit this file directly.
+
 ## License
 
 MIT
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a Pull Request on [GitHub](https://github.com/vaddisiva5034/cmdvault).
 
 ## Support
 
-For issues and questions, please open an issue on GitHub.
+- **Issues & Bug Reports:** [GitHub Issues](https://github.com/vaddisiva5034/cmdvault/issues)
+- **npm Package:** [npmjs.com/package/cmdvault](https://www.npmjs.com/package/cmdvault)
+
+---
+
+Made with ❤️ for developers who love their terminal

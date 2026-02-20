@@ -1,10 +1,10 @@
 {
   "name": "cmdvault",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CmdVault - A smart terminal assistant that remembers and executes shell commands",
   "main": "index.js",
   "bin": {
-    "cm": "./bin/cm.js"
+    "cm": "bin/cm.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,7 +17,11 @@
     "shell",
     "productivity"
   ],
-  "author": "",
+  "author": "Kiran Vaddi <kiranvaddi3008@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vaddisiva5034/cmdvault.git"
+  },
   "license": "MIT",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
